@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/login.png') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/registerTemplate.css') }}" />
+</head>
+<body>
+  <script src="{{ url_for('static', filename='scripts/validation.js') }}"></script>
+
+  {% if (msg == "Succesfull") %}
+    <script>alert("Registration Succesful")</script>
+    <script>window.location.href = "/index";</script>
+  {% elif (msg == "ERROR") %}
+    <script>alert("{{msg1}}")</script>
+  {% endif %}
+
+  <div class="top-container">
+    <div class="button-container">
+      <button class="button" id="homepage" onclick="window.location.href='/index'">Homepage</button>
+      <button class="button" id="register" onclick="window.location.href='/loginPage'">Log In</button>
+    </div>
+  </div>
+  <br><br><br><br>
+  <div class="bottom-container">
+    <div id='form'>
+    <h1>Registration</h1>
+      <form name="Registration" method="post" action='/registration' onsubmit="return checkPassword()">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="fullname">Full Name:</label><br>
+        <input type="text" id="fullname" name="fullname" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="telno">Phone Number:</label><br>
+        <input type="tel" id="telno" name="telno" pattern="[0-9]{10}" required>
+        <small>Format: 10 digit integer number (e.g. 5123456789)</small>
+        <br><br>
+
+        <input type="submit" value="Submit"  id='gbtn'>
+      </form>
+    </div>
+  </div> 
+</body>
+</html>

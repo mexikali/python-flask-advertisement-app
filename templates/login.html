@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login Page</title>
+		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/login.png') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles/loginDesign.css') }}" />
+	</head>
+	
+	<body>
+		{% if (msg == "success") %}
+		<script>alert("Login Succesful")</script>
+		<script>window.location.href = "/index";</script>
+		{% elif (msg == "error") %}
+		<script>alert("Login ERROR!!!")</script>
+		{% endif %}
+
+		<div class="top-container">
+			<div class="button-container">
+				<button class="button" id="homepage" onclick="window.location.href='/index'">Homepage</button>
+				<button class="button" id="register" onclick="window.location.href='/registration'">Register</button>
+			</div>
+		</div>
+		<div class="bottom-container">
+			<div id='form'>
+				<form action="/login" method="post">
+					
+					<label for='username'>Username:     </label>
+					<input type='text' id='username' name='username' required>
+					<br><br>
+					<label for='password'>Password:  </label>
+					<input type='password' id='password' name='password' required>
+					<br><br>
+					<input type='submit' value='Log In' id='gbtn'/>       
+				</form>		
+			</div>
+		</div>
+	</body>
+</html>

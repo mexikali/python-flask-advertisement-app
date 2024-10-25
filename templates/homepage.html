@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/login.png') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/homePageDesign.css') }}" />
+</head>
+<body>
+    <div class="top-container">
+        <div class="button-container">
+            <button class="button" onclick="window.location.href='/index'">Homepage</button>
+            {% if username %}
+            <button class="button" onclick="window.location.href='/myAd'">My Advertisements</button>
+            <button class="button" onclick="window.location.href='/myprofile'">My Profile</button>
+            <button class="button" onclick="window.location.href='/logout'">Log Out</button>
+            {% else %}
+            <button class="button" onclick="window.location.href='/registration'">Register</button>
+            <button class="button" onclick="window.location.href='/loginPage'">Log In</button>
+            {% endif %}
+        </div>
+    </div>
+    <br><br><br><br>
+    <div class="second-container">
+        <h1>Welcome to the Advertisement Application</h1>
+        <div class="button-container">
+            <form action="/actives" method="post">
+                <input type="text" class="search-input" placeholder="Search something..." name="keyword">
+                <select name="category">
+                <option value="0">All Catogories</option>
+                {% for category in categories %}
+                <option value="{{category[0]}}">{{category[1]}}</option>
+                {% endfor %}
+                </select>
+                <input type='submit' value='Search' id='gbtn'/>  
+            </form>
+        </div>
+        <div class="dataDiv">
+            <h2>Advertisements:</h2>
+            {% if (msg == "error")  %}
+            <h3>No ads were found matching your search criteria.</h3>
+            {% elif not msg %}
+            <h3>Search to see ads...</h3>
+            {% else %}
+
+            {% for key, value in msg.items() %}
+            <h4>{{key.upper()}}:</h4>
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Contact Full Name</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for row in value %}
+                        <tr>
+                            <td>{{ row[0] }}</td> 
+                            <td>{{ row[1] }}</td> 
+                            <td>{{ row[3] }}</td> 
+                            <td>
+                                <a href="/seeMore?title={{row[0]}}&description={{row[1]}}&category={{row[2]}}&fullname={{row[3]}}&email={{row[4]}}&tel={{row[5]}}">See More</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    
+</body>
+</html>

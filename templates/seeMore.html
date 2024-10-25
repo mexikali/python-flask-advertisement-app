@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>See More</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/login.png') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/seeMoreDesign.css') }}" />
+</head>
+<body>
+    
+    <div class="second-container">
+        <h1>Detailed Information:</h1>
+        <div class="button-container">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Contact Full Name</th>
+                    <th>Contact Email</th>
+                    <th>Contact Telephone Number</th>
+                </tr>
+                <tr>
+                    <td>{{title}}</td>
+                    <td>{{description}}</td>
+                    <td>{{category}}</td>
+                    <td>{{fullname}}</td>
+                    <td>{{email}}</td>
+                    <td>{{tel}}</td>
+                </tr>
+                
+            </table>
+            <div class="button-container">
+                <a href="javascript:history.go(-1)">Go Back</a>
+            </div>
+        </div>
+
+        
+    
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My Advertisements</title>
+		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/login.png') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles/myAdDesign.css') }}" />
+	</head>
+	
+	<body>
+		{% if (msg == "success") %}
+		<script>alert("New Advertisment Published Succesfully")</script>
+		{% elif (msg == "error") %}
+		<script>alert("ERROR Occured!!!")</script>
+		{% endif %}
+
+        {% if (update == "SUCCESFUL") %}
+            <script>alert("Action Succesful")</script>
+        {% elif (update == "ERROR") %}
+            <script>alert("Action ERROR!!!")</script>
+        {% endif %}
+
+		<div class="top-container">
+            <div class="button-container">
+                <button class="button" onclick="window.location.href='/index'">Homepage</button>
+                <button class="button" onclick="window.location.href='/myprofile'">My Profile</button>
+                <button class="button" onclick="window.location.href='/logout'">Log Out</button>
+            </div>
+        </div>
+        <br><br><br><br>
+		<div class="bottom-container">
+			<div id='form'>
+                <h2>Publish New Advertisment</h2>
+				<form action="/myAd" method="post">
+					
+					<label for='title'>Title:     </label>
+					<input type='text' id='title' name='title' required>
+					<br><br>
+					<label for='description'>Description:  </label>
+					<input type='text' id='description' name='description' required>
+					<br><br>
+                    <label for="category">Select a category:</label>
+                    <select id="category" name="category">
+                        {% for category in categories %}
+                        <option value="{{category[0]}}">{{category[1]}}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+					<input type='submit' value='Publish' id='gbtn'/>       
+				</form>		
+			</div>
+		</div>
+        <div class="dataDiv">
+            <h2>My Advertisements:</h2>
+            {% if ads %}
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for ad in ads %}
+                        <tr>
+                            <td>{{ ad[0] }}</td> 
+                            <td>{{ ad[1] }}</td> 
+                            <td>{{ ad[2] }}</td> 
+                            <td>
+                                {% if ad[3] == 1 %}
+                                    <a href="/activation?type=0&aid={{ad[4]}}">Deactivate</a>
+                                {% else %}
+                                    <a href="/activation?type=1&aid={{ad[4]}}">Activate</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <h2>You have not published any ads before...</h2>
+            {% endif %}
+        </div>
+	</body>
+</html>
